@@ -1,0 +1,50 @@
+@import "https://fonts.googleapis.com/css?family=Press%20Start%202P";
+
+body {
+  background-image: url("../imagenes/paisaje.jpg");
+
+  .container {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 702px;
+
+    #my_canvas{ 
+      background:#000000; 
+      border:#000 1px solid; 
+    }
+  
+    .barra {
+      background-color:#000000;
+      color: #ffffff;
+      font-size: 20px;
+      height: 25px; 
+      width: 700px;
+      margin: auto;
+    }
+
+    .barra + .buttons {
+      margin-top: 5px;
+    }
+  
+    .buttons {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 700px;
+
+      .boton{
+        color:red;
+        font-size: 20px;
+        font-family: 'Press Start 2P';
+        background-color: #000000;
+        cursor: pointer;
+        border-radius: 8px;
+        border:2px solid blue;
+    
+        &:hover{
+          background-color: white;
+          color: #000000;
+        }
+      }
+    }
+  }
+}

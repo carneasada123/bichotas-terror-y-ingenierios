@@ -1,0 +1,24 @@
+- Ajustar tamaño de los enemigos y que su area pegue correcatamente.
+- Agregar un contador por enemigo eliminado.
+- Hacer que se recargue el juego una vez muerto con la tecla espacio. (HECHO)
+- Agregar la imagen de libro de español lecturas en el misil.
+
+BONUS:
+- Agregar mas enemigos.
+
+function puntuacion(){
+    ctx.font="40px impact";
+    ctx.fillStyle= "#000000";
+    ctx.fillText(nivel.marcador,250,60);
+    if (nivel.muerto==true){
+        ctx.font="50px Arial Black";
+        ctx.fillText('WASTED NIGGA',30,300,100,100);
+    }
+
+var contador = [];
+for (var i = 0; i < hitDetect.lenght; i++) {
+	if (hitDetect[i]) contador.push(i);
+}
+ctx.font="40px impact";
+ctx.fillStyle= "#000000";
+ctx.fillText(contador.lenght,250,60);
