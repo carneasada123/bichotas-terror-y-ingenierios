@@ -17,6 +17,7 @@ function initCanvas(){
     // width and height (canvas)
     var cW = ctx.canvas.width; // 700px 
     var cH = ctx.canvas.height;// 600px
+    var score = 0;
 
     // template for naves
     var enemyTemplate = function(options){
@@ -80,11 +81,9 @@ function initCanvas(){
     }
 
     function marcador(){
-        for(i = 0; i<enemies.length; i++){
-            ctx.font="35px stencil";
-            ctx.fillStyle= "#ffffff";
-            ctx.fillText('ingenieros: '+enemies.length,60,50);
-        }
+        ctx.font="35px stencil";
+        ctx.fillStyle= "#ffffff";
+        ctx.fillText('ingenieros: '+ score,60,50);
     }
 
     function Launcher(){
@@ -127,7 +126,7 @@ function initCanvas(){
                     this.misiles.splice(i,1); // splice that missile out of the misiles array
                 }
             }
-            marcador();
+
             // This happens if you win
             if (enemies.length === 0) {
                 clearInterval(animateInterval); // Stop the game animation loop
@@ -136,6 +135,7 @@ function initCanvas(){
                 ctx.fillText('ganaste!', cW * .5 - 80, 50);
                 reiniciomuerto();
             }
+            marcador();
         }
         
         // Detectar impacto de bullet (bala)
@@ -150,6 +150,7 @@ function initCanvas(){
                     this.misiles.splice(this.misiles[mi],1); // Remove the missile
                     enemies.splice(i, 1); // Remove the enemy that the missile hit
                     document.querySelector('.barra').innerHTML = "Destroyed "+ e.id+ " ";
+                    score++;
                 }
             }
         }
