@@ -79,6 +79,14 @@ function initCanvas(){
         }
     }
 
+    function marcador(){
+        for(i = 0; i<enemies.length; i++){
+            ctx.font="35px stencil";
+            ctx.fillStyle= "#ffffff";
+            ctx.fillText('ingenieros: '+enemies.length,60,50);
+        }
+    }
+
     function Launcher(){
         // bullet location (ubicación de balas)
         this.y = 500, 
@@ -119,6 +127,7 @@ function initCanvas(){
                     this.misiles.splice(i,1); // splice that missile out of the misiles array
                 }
             }
+            marcador();
             // This happens if you win
             if (enemies.length === 0) {
                 clearInterval(animateInterval); // Stop the game animation loop
