@@ -17,6 +17,8 @@ function initCanvas(){
     // width and height (canvas)
     var cW = ctx.canvas.width; // 700px 
     var cH = ctx.canvas.height;// 600px
+
+    // Valor del score
     var score = 0;
 
     // template for naves
@@ -83,7 +85,7 @@ function initCanvas(){
     function marcador(){
         ctx.font="35px stencil";
         ctx.fillStyle= "#ffffff";
-        ctx.fillText('ingenieros: '+ score,60,50);
+        ctx.fillText('ingenieros: '+ score, 40,50);
     }
 
     function Launcher(){
@@ -131,8 +133,9 @@ function initCanvas(){
             if (enemies.length === 0) {
                 clearInterval(animateInterval); // Stop the game animation loop
                 ctx.fillStyle = 'yellow';
-                ctx.font = "50px Arial Black";
-                ctx.fillText('ganaste!', cW * .5 - 80, 50);
+                ctx.font = "30px Arial Black";
+                ctx.fillText('Felicidades los', 300, 40);
+                ctx.fillText('hiciste ingenieros B)', 300, 70);
                 reiniciomuerto();
             }
             marcador();
@@ -149,7 +152,7 @@ function initCanvas(){
                    m.y <= e.y+e.h){
                     this.misiles.splice(this.misiles[mi],1); // Remove the missile
                     enemies.splice(i, 1); // Remove the enemy that the missile hit
-                    document.querySelector('.barra').innerHTML = "Destroyed "+ e.id+ " ";
+                    document.querySelector('.barra').innerHTML = "Elimina a una razita de "+ enemies.length + " antes de llegar al vicio";
                     score++;
                 }
             }

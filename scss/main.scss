@@ -10,16 +10,18 @@ body {
 
     #my_canvas{ 
       background:#000000; 
-      border:#000 1px solid; 
     }
   
     .barra {
       background-color:#000000;
       color: #ffffff;
-      font-size: 20px;
+      font-size: 15px;
+      font-family: "system-ui";
       height: 25px; 
-      width: 700px;
+      max-width: 700px;
       margin: auto;
+      padding-left: 180px;
+      padding-right: 180px;
     }
 
     .barra + .buttons {
