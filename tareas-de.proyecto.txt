@@ -1,5 +1,7 @@
+---------TAREAS----------- 10/03/22
+- Menu de instrucciones.                                              (HECHO)
 - Ajustar tamaño de los enemigos y que su area pegue correcatamente.
-- Agregar un contador por enemigo eliminado.
+- Agregar un contador por enemigo eliminado.                          (HECHO)
 - Hacer que se recargue el juego una vez muerto con la tecla espacio. (HECHO)
 - Agregar la imagen de libro de español lecturas en el misil.
 

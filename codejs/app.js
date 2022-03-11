@@ -5,6 +5,9 @@ function initCanvas(){
     var enemiespic1  = new Image(); // enemigo 1
     var enemiespic2 = new Image(); // enemigo 2
     var libro01     = new Image();
+    var teclai      = new Image();
+    var gracias     = new Image();
+    var corazon       = new Image();
  
     // backgroundImage y naveImage
     backgroundImage.src = "imagenes/fondo.png"; //Background picture
@@ -13,7 +16,10 @@ function initCanvas(){
     enemiespic1.src     = "imagenes/cholos.png";
     enemiespic2.src     = "imagenes/diva.png"; //Enemies picture
     libro01.src         = "imagenes/libro.jpg";
-    
+    teclai.src          = "imagenes/teclai.png";
+    gracias.src         = "imagenes/gracias.png";
+    corazon.src           = "imagenes/corazon.png";
+
     // width and height (canvas)
     var cW = ctx.canvas.width; // 700px 
     var cH = ctx.canvas.height;// 600px
@@ -76,7 +82,7 @@ function initCanvas(){
     var renderEnemies = function (enemyList) {
         for (var i = 0; i < enemyList.length; i++) {
             console.log(enemyList[i]);
-            ctx.drawImage(enemyList[i].image, enemyList[i].x, enemyList[i].y += .5, enemyList[i].w, enemyList[i].h);
+            ctx.drawImage(enemyList[i].image, enemyList[i].x, enemyList[i].y += .6, enemyList[i].w, enemyList[i].h);
             // Detects when ships hit lower level
             launcher.hitDetectLowerLevel(enemyList[i]);
         }
@@ -85,12 +91,32 @@ function initCanvas(){
     function marcador(){
         ctx.font="35px stencil";
         ctx.fillStyle= "#ffffff";
-        ctx.fillText('ingenieros: '+ score, 40,50);
+        ctx.fillText('ingenieros: '+ score, 20,50);
+        ctx.font="15px stencil";
+        ctx.drawImage(teclai, 160, 60, 65, 65);
+        ctx.fillText('presiona la tecla', 20,85);
+        ctx.fillText('para mas informacion', 20,100); 
+    }
+
+    function detenerJuego (){
+        clearInterval(animateInterval);
+    }
+
+    function infoJuego(){
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode == 73) {
+                detenerJuego();
+                ctx.drawImage(gracias, 20, 20, 660, 550); // background image
+            } else if (event.keyCode == 80) {
+                location.reload();
+            }
+        });
     }
 
     function Launcher(){
+        infoJuego();
         // bullet location (ubicación de balas)
-        this.y = 500, 
+        this.y = 425, 
         this.x = cW*.5-25, 
         this.w = 100, 
         this.h = 100,   
@@ -131,11 +157,12 @@ function initCanvas(){
 
             // This happens if you win
             if (enemies.length === 0) {
-                clearInterval(animateInterval); // Stop the game animation loop
-                ctx.fillStyle = 'yellow';
+                detenerJuego(); // Stop the game animation loop
+                ctx.fillStyle = '#49C600';
                 ctx.font = "30px Arial Black";
                 ctx.fillText('Felicidades los', 300, 40);
-                ctx.fillText('hiciste ingenieros B)', 300, 70);
+                ctx.fillText('hiciste ingenieros!', 300, 70);
+                ctx.drawImage(corazon, 490, 100, 160, 160);
                 reiniciomuerto();
             }
             marcador();
@@ -177,11 +204,11 @@ function initCanvas(){
             if ((enemy.y < this.y + 25 && enemy.y > this.y - 25) &&
                 (enemy.x < this.x + 45 && enemy.x > this.x - 45)) { // Checking if enemy is on the left or right of spaceship
                     this.gameStatus.over = true;
-                    this.gameStatus.message = 'You Died!'
+                    this.gameStatus.message = 'la raza te pego el vicio'
                 }
 
             if(this.gameStatus.over === true){  
-                clearInterval(animateInterval); // Stop the game animation loop
+                detenerJuego();; // Stop the game animation loop
                 ctx.fillStyle = this.gameStatus.fillStyle; // set color to text
                 ctx.font = this.gameStatus.font;
                 // To show text on canvas
