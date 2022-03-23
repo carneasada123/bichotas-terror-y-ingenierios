@@ -1,4 +1,5 @@
 ---BICHOTAS TERROR Y INGENIEROS---
+
 Videojuego hecho con Javacript (canvas), HTML y estilos en sass. 
 
 Eres JulioProfe y debes educar a una raza placosona lanzandoles libros de texto como proyectil.
