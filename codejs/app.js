@@ -9,14 +9,15 @@ function initCanvas(){
     var gracias     = new Image();
     var corazon       = new Image();
  
-    // backgroundImage y naveImage
+    // Imagen de fondo y Imagen de la nave
     backgroundImage.src = "imagenes/fondo.png"; //Background picture
     naveImage.src       = "imagenes/maestro.png"; //Spaceship picture
     // Enemigos fotos
     enemiespic1.src     = "imagenes/cholos.png";
     enemiespic2.src     = "imagenes/diva.png"; //Enemies picture
-    // Imagenes extras
+    // Imagen del proyectil
     libro01.src         = "imagenes/libro.jpg";
+    // Imagenes extras
     teclai.src          = "imagenes/teclai.png";
     gracias.src         = "imagenes/gracias.png";
     corazon.src           = "imagenes/corazon.png";
@@ -27,6 +28,8 @@ function initCanvas(){
 
     // Valor del score
     var score = 0;
+    // Valor falso por si se ocupa (si se ocupo)
+    var teclaPress = false;
 
     // template for naves
     var enemyTemplate = function(options){
@@ -50,6 +53,36 @@ function initCanvas(){
         fire_btn.addEventListener('mousedown', function(event) {
             location.reload();  
         });
+    }
+
+    function marcador(){
+        ctx.font="35px stencil";
+        ctx.fillStyle= "#ffffff";
+        ctx.fillText('ingenieros: '+ score, 20,50);
+        ctx.font="15px stencil";
+        ctx.drawImage(teclai, 160, 60, 65, 65);
+        ctx.fillText('presiona la tecla', 20,85);
+        ctx.fillText('para mas informacion', 20,100); 
+    }
+
+    function infoJuego(){
+        document.addEventListener('keydown', function(event) {
+            if (!teclaPress){
+                if (event.keyCode == 73) {
+                    detenerJuego();
+                    ctx.drawImage(gracias, 20, 20, 660, 550); // background image
+                    teclaPress = true;
+                }
+            }else if(teclaPress){
+                if (event.keyCode == 80) {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function detenerJuego (){
+        clearInterval(animateInterval);
     }
 
     // To reduce a repetitive function or two I've made some slight changes to how you create enemies.
@@ -89,40 +122,7 @@ function initCanvas(){
         }
     }
 
-    function marcador(){
-        ctx.font="35px stencil";
-        ctx.fillStyle= "#ffffff";
-        ctx.fillText('ingenieros: '+ score, 20,50);
-        ctx.font="15px stencil";
-        ctx.drawImage(teclai, 160, 60, 65, 65);
-        ctx.fillText('presiona la tecla', 20,85);
-        ctx.fillText('para mas informacion', 20,100); 
-    }
-
-    function detenerJuego (){
-        clearInterval(animateInterval);
-    }
-
-    var teclaPress = false;
-
-    function infoJuego(){
-        document.addEventListener('keydown', function(event) {
-            if (!teclaPress){
-                if (event.keyCode == 73) {
-                    detenerJuego();
-                    ctx.drawImage(gracias, 20, 20, 660, 550); // background image
-                    teclaPress = true;
-                }
-            }else if(teclaPress){
-                if (event.keyCode == 80) {
-                    location.reload();
-                }
-            }
-        });
-    }
-
     function Launcher(){
-       // var misiles = ctx.drawImage(libro01,this.x,this.y, 120, 120);
         infoJuego();
         // bullet location (ubicación de balas)
         this.y = 425, 
@@ -130,7 +130,7 @@ function initCanvas(){
         this.w = 100, 
         this.h = 100,   
         this.direccion, 
-        this.bg="yellow", // bullet color (color de bala)
+        this.bg= "yellow", // bullet color (color de bala)
         this.misiles = [];
 
          // If you wanted to use different fonts or messages for the player losing you can change it accordingly.
@@ -138,7 +138,7 @@ function initCanvas(){
             over: false, 
             message: "",
             fillStyle: 'red',
-            font: 'italic bold 36px Arial, sans-serif',
+            font: 'italic bold 34px Arial, sans-serif',
         }
 
         this.render = function () {
@@ -157,7 +157,7 @@ function initCanvas(){
 
             for(var i=0; i < this.misiles.length; i++){
                 var m = this.misiles[i];
-                ctx.fillRect(m.x, m.y-=5, m.w, m.h); // bullet direction
+                ctx.drawImage(libro01, m.x, m.y-=5, m.w, m.h); // bullet direction
                 this.hitDetect(this.misiles[i],i);
                 if(m.y <= 0){ // If a missile goes past the canvas boundaries, remove it
                     this.misiles.splice(i,1); // splice that missile out of the misiles array
@@ -199,7 +199,7 @@ function initCanvas(){
             // If location of ship is greater than 550 then we know it passed lower level
             if(enemy.y > 550){
                 this.gameStatus.over = true;
-                this.gameStatus.message = 'Han llegado a su vitamina';
+                this.gameStatus.message = 'consiguieron su vitamina!'
             }
             // Esto detecta un choque de la nave con enemigos
             //console.log(this);
@@ -213,7 +213,7 @@ function initCanvas(){
             if ((enemy.y < this.y + 25 && enemy.y > this.y - 25) &&
                 (enemy.x < this.x + 45 && enemy.x > this.x - 45)) { // Checking if enemy is on the left or right of spaceship
                     this.gameStatus.over = true;
-                    this.gameStatus.message = 'la raza te pego el vicio'
+                    this.gameStatus.message = 'la raza te pego el vicio!'
                 }
 
             if(this.gameStatus.over === true){  
@@ -221,7 +221,7 @@ function initCanvas(){
                 ctx.fillStyle = this.gameStatus.fillStyle; // set color to text
                 ctx.font = this.gameStatus.font;
                 // To show text on canvas
-                ctx.fillText(this.gameStatus.message, cW * .5 - 80, 50); // text x , y
+                ctx.fillText(this.gameStatus.message, cW * .5 - 90, 50); // text x , y
                 reiniciomuerto();
             }
         }
@@ -339,7 +339,7 @@ function initCanvas(){
     // This fires when clicking on space button from keyboard
     document.addEventListener('keydown', function(event) {
         if(event.keyCode == 32) {
-           launcher.misiles.push({x: launcher.x + launcher.w*.5, y: launcher.y, w: 50,h: 50});
+           launcher.misiles.push({x: launcher.x + launcher.w*.5, y: launcher.y, w: 55,h: 60});
         }
     });
 }
