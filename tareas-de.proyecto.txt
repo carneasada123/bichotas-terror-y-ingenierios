@@ -5,24 +5,10 @@
 - Agregar un contador por enemigo eliminado.                          (HECHO)
 - Hacer que se recargue el juego una vez muerto con la tecla espacio. (HECHO)
 - Agregar la imagen de libro de español lecturas en el misil.         (HECHO)
-- Una solucion para el resize del juego en la pantalla.
-
-BONUS:
+- Una solucion para el resize del juego en la pantalla.               (HECHO)
 - Agregar mas enemigos.
 
 function puntuacion(){
     ctx.font="40px impact";
     ctx.fillStyle= "#000000";
-    ctx.fillText(nivel.marcador,250,60);
-    if (nivel.muerto==true){
-        ctx.font="50px Arial Black";
-        ctx.fillText('WASTED NIGGA',30,300,100,100);
-    }
-
-var contador = [];
-for (var i = 0; i < hitDetect.lenght; i++) {
-	if (hitDetect[i]) contador.push(i);
-}
-ctx.font="40px impact";
-ctx.fillStyle= "#000000";
-ctx.fillText(contador.lenght,250,60);
+} 

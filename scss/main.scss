@@ -2,6 +2,7 @@
 
 body {
   background-image: url("../imagenes/paisaje.jpg");
+  zoom: 70%;
 
   .container {
     margin: 0 auto;
@@ -48,5 +49,23 @@ body {
         }
       }
     }
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    zoom: 75%;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    zoom: 80%;
+  }
+}
+
+@media (min-width: 1440px) {
+  body {
+    zoom: 105%;
   }
 }

@@ -1,6 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Press%20Start%202P";
 body {
   background-image: url("../imagenes/paisaje.jpg");
+  zoom: 70%;
 }
 body .container {
   margin: 0 auto;
@@ -41,6 +42,22 @@ body .container .buttons .boton {
 body .container .buttons .boton:hover {
   background-color: white;
   color: #000000;
+}
+
+@media (min-width: 768px) {
+  body {
+    zoom: 75%;
+  }
+}
+@media (min-width: 1024px) {
+  body {
+    zoom: 80%;
+  }
+}
+@media (min-width: 1440px) {
+  body {
+    zoom: 105%;
+  }
 }
 
 /*# sourceMappingURL=coolstyles.css.map */

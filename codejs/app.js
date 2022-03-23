@@ -197,7 +197,7 @@ function initCanvas(){
         // Ask player ship if an enemy has passed or has hit the player ship
         this.hitDetectLowerLevel = function(enemy){
             // If location of ship is greater than 550 then we know it passed lower level
-            if(enemy.y > 550){
+            if(enemy.y > 500){
                 this.gameStatus.over = true;
                 this.gameStatus.message = 'consiguieron su vitamina!'
             }
