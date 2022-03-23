@@ -11,10 +11,11 @@ function initCanvas(){
  
     // backgroundImage y naveImage
     backgroundImage.src = "imagenes/fondo.png"; //Background picture
-    naveImage.src       = "imagenes/maestra.png"; //Spaceship picture
+    naveImage.src       = "imagenes/maestro.png"; //Spaceship picture
     // Enemigos fotos
     enemiespic1.src     = "imagenes/cholos.png";
     enemiespic2.src     = "imagenes/diva.png"; //Enemies picture
+    // Imagenes extras
     libro01.src         = "imagenes/libro.jpg";
     teclai.src          = "imagenes/teclai.png";
     gracias.src         = "imagenes/gracias.png";
@@ -102,18 +103,26 @@ function initCanvas(){
         clearInterval(animateInterval);
     }
 
+    var teclaPress = false;
+
     function infoJuego(){
         document.addEventListener('keydown', function(event) {
-            if (event.keyCode == 73) {
-                detenerJuego();
-                ctx.drawImage(gracias, 20, 20, 660, 550); // background image
-            } else if (event.keyCode == 80) {
-                location.reload();
+            if (!teclaPress){
+                if (event.keyCode == 73) {
+                    detenerJuego();
+                    ctx.drawImage(gracias, 20, 20, 660, 550); // background image
+                    teclaPress = true;
+                }
+            }else if(teclaPress){
+                if (event.keyCode == 80) {
+                    location.reload();
+                }
             }
         });
     }
 
     function Launcher(){
+       // var misiles = ctx.drawImage(libro01,this.x,this.y, 120, 120);
         infoJuego();
         // bullet location (ubicación de balas)
         this.y = 425, 
@@ -190,7 +199,7 @@ function initCanvas(){
             // If location of ship is greater than 550 then we know it passed lower level
             if(enemy.y > 550){
                 this.gameStatus.over = true;
-                this.gameStatus.message = 'Enemy(s) have passed!';
+                this.gameStatus.message = 'Han llegado a su vitamina';
             }
             // Esto detecta un choque de la nave con enemigos
             //console.log(this);
