@@ -1,9 +1,11 @@
----------TAREAS----------- 10/03/22
+---------TAREAS----------- 22/03/22
+- Arreglar problema con el Menu que se puede presionar 2 veces y su tecla P queda activa. (HECHO)
 - Menu de instrucciones.                                              (HECHO)
-- Ajustar tamaño de los enemigos y que su area pegue correcatamente.
+- Ajustar tamaño de los enemigos y que su area pegue correcatamente.    
 - Agregar un contador por enemigo eliminado.                          (HECHO)
 - Hacer que se recargue el juego una vez muerto con la tecla espacio. (HECHO)
 - Agregar la imagen de libro de español lecturas en el misil.         (HECHO)
+- Una solucion para el resize del juego en la pantalla.
 
 BONUS:
 - Agregar mas enemigos.
