@@ -172,7 +172,7 @@ function initCanvas(){
                 ctx.fillText('Felicidades los', 300, 40);
                 ctx.fillText('hiciste ingenieros!', 300, 70);
                 ctx.drawImage(corazon, 490, 100, 160, 160);
-                reiniciomuerto();
+                setTimeout(reiniciomuerto, 1000);
             }
             marcador();
         }
@@ -222,7 +222,7 @@ function initCanvas(){
                 ctx.font = this.gameStatus.font;
                 // To show text on canvas
                 ctx.fillText(this.gameStatus.message, cW * .5 - 90, 50); // text x , y
-                reiniciomuerto();
+                setTimeout(reiniciomuerto, 1000);
             }
         }
     }
