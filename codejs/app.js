@@ -1,7 +1,7 @@
 function initCanvas(){
     var ctx = document.getElementById('my_canvas').getContext('2d');
     var backgroundImage = new Image();
-    var naveImage   = new Image(); // nave
+    var teacher   = new Image(); // nave
     var enemiespic1  = new Image(); // enemigo 1
     var enemiespic2 = new Image(); // enemigo 2
     var libro01     = new Image();
@@ -11,12 +11,15 @@ function initCanvas(){
  
     // Imagen de fondo y Imagen de la nave
     backgroundImage.src = "imagenes/fondo.png"; //Background picture
-    naveImage.src       = "imagenes/maestro.png"; //Spaceship picture
+    teacher.src       = "imagenes/maestro.png"; //Teacher picture
+
     // Enemigos fotos
     enemiespic1.src     = "imagenes/cholos.png";
     enemiespic2.src     = "imagenes/diva.png"; //Enemies picture
+
     // Imagen del proyectil
     libro01.src         = "imagenes/libro.jpg";
+
     // Imagenes extras
     teclai.src          = "imagenes/teclai.png";
     gracias.src         = "imagenes/gracias.png";
@@ -55,7 +58,36 @@ function initCanvas(){
         });
     }
 
+    function colRed(){
+        ctx.shadowBlur = 9;
+        ctx.shadowColor = 'rgba(255, 0, 0, .9)';
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+    }
+
+    function colOrange(){
+        ctx.shadowBlur = 9;
+        ctx.shadowColor = 'rgba(255, 0, 0, .8)';
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+    }
+
+    function colGreen(){
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = 'rgba(36, 255, 25, .9)';
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+    }
+
+    function colDef(){
+        ctx.shadowBlur = null;
+        ctx.shadowColor = '';
+        ctx.shadowOffsetX = null;
+        ctx.shadowOffsetY = null;
+    }
+   
     function marcador(){
+        colDef();
         ctx.font="35px stencil";
         ctx.fillStyle= "#ffffff";
         ctx.fillText('ingenieros: '+ score, 20,50);
@@ -70,6 +102,7 @@ function initCanvas(){
             if (!teclaPress){
                 if (event.keyCode == 73) {
                     detenerJuego();
+                    colDef();
                     ctx.drawImage(gracias, 20, 20, 660, 550); // background image
                     teclaPress = true;
                 }
@@ -115,6 +148,7 @@ function initCanvas(){
     // This also forces enemies to check if THEY are hitting the player 
     var renderEnemies = function (enemyList) {
         for (var i = 0; i < enemyList.length; i++) {
+            colRed();
             console.log(enemyList[i]);
             ctx.drawImage(enemyList[i].image, enemyList[i].x, enemyList[i].y += 1.3, enemyList[i].w, enemyList[i].h);
             // Detects when ships hit lower level
@@ -137,8 +171,9 @@ function initCanvas(){
          this.gameStatus = {
             over: false, 
             message: "",
-            fillStyle: 'red',
+            fillStyle: 'orange',
             font: 'italic bold 34px Arial, sans-serif',
+
         }
 
         this.render = function () {
@@ -151,11 +186,13 @@ function initCanvas(){
             }else if(this.direccion === "upArrow"){
                 this.y-=5;
             }
+            colGreen();
             ctx.fillStyle = this.bg;
             ctx.drawImage(backgroundImage, -180, -350, 1500, 1000); // background image
-            ctx.drawImage(naveImage,this.x,this.y, 120, 120); // we need to make sure spaceship is at the same location as the bullets
+            ctx.drawImage(teacher,this.x,this.y, 120, 120); // we need to make sure teacher is at the same location as the bullets
 
             for(var i=0; i < this.misiles.length; i++){
+                colGreen();
                 var m = this.misiles[i];
                 ctx.drawImage(libro01, m.x, m.y-=2.6, m.w, m.h); // bullet direction
                 this.hitDetect(this.misiles[i],i);
@@ -203,7 +240,7 @@ function initCanvas(){
             }
             // Esto detecta un choque de la nave con enemigos
             //console.log(this);
-            // this.y -> where is spaceship location
+            // this.y -> where is teacher location
             if(enemy.id === 'enemy3'){
                 //console.log(this.y);
                 console.log(this.x);
@@ -211,7 +248,7 @@ function initCanvas(){
             // a) If enemy y is greater than this.y - 25 => then we know there's a collision
             // b) If enemy x is gless than this.x + 45 && enemy x > this.x - 45 then we know theres a collision
             if ((enemy.y < this.y + 25 && enemy.y > this.y - 25) &&
-                (enemy.x < this.x + 45 && enemy.x > this.x - 45)) { // Checking if enemy is on the left or right of spaceship
+                (enemy.x < this.x + 45 && enemy.x > this.x - 45)) { // Checking if enemy is on the left or right of teacher
                     this.gameStatus.over = true;
                     this.gameStatus.message = 'la raza te pego el vicio!'
                 }
@@ -221,6 +258,7 @@ function initCanvas(){
                 ctx.fillStyle = this.gameStatus.fillStyle; // set color to text
                 ctx.font = this.gameStatus.font;
                 // To show text on canvas
+                colOrange();
                 ctx.fillText(this.gameStatus.message, cW * .5 - 90, 50); // text x , y
                 setTimeout(reiniciomuerto, 1000);
             }
