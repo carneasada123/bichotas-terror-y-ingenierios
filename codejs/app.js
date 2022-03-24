@@ -87,28 +87,28 @@ function initCanvas(){
 
     // To reduce a repetitive function or two I've made some slight changes to how you create enemies.
     var enemies = [
-                   new enemyTemplate({id: "enemy1", x: 100, y: -20, w: 50, h: 30 }),
-                   new enemyTemplate({id: "enemy2", x: 225, y: -20, w: 50, h: 30 }),
-                   new enemyTemplate({id: "enemy3", x: 350, y: -20, w: 80, h: 30 }),
-                   new enemyTemplate({id: "enemy4", x:100,  y:-70,  w:80,  h: 30}),
-                   new enemyTemplate({id: "enemy5", x:225,  y:-70,  w:50,  h: 30}),
-                   new enemyTemplate({id: "enemy6", x:350,  y:-70,  w:50,  h: 30}),
-                   new enemyTemplate({id: "enemy7", x:475,  y:-70,  w:50,  h: 30}),
-                   new enemyTemplate({id: "enemy8", x:600,  y:-70,  w:80,  h: 30}),
-                   new enemyTemplate({id: "enemy9", x:475,  y:-20,  w:50,  h: 30}),
-                   new enemyTemplate({id: "enemy10",x: 600, y: -20, w: 50, h: 30}),
+                   new enemyTemplate({id: "enemy1", x: 225, y: -110, w: 90, h: 60 }),
+                   new enemyTemplate({id: "enemy2", x: 350, y: -110, w: 90, h: 60 }),
+                   new enemyTemplate({id: "enemy3", x: 475, y: -110, w: 90, h: 60 }),
+                   new enemyTemplate({id: "enemy4", x: 50, y: -20,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy5", x: 600, y: -20,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy6", x: 285, y: -250,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy7", x: 410, y: -250,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy8", x: 285, y: -170,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy9", x: 410, y: -170,  w:90,  h: 60}),
+                   new enemyTemplate({id: "enemy10",x: 325, y: -380,  w:130, h: 110}), //enemigo grande
 
                    // Segundo grupo de enemigos
-                   new enemyTemplate({ id: "enemy11", x: 100, y: -220, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy12", x: 225, y: -220, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy13", x: 350, y: -220, w: 80, h: 50, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy14", x: 100, y: -270, w: 80, h: 50, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy15", x: 225, y: -270, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy16", x: 350, y: -270, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy17", x: 475, y: -270, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy18", x: 600, y: -270, w: 80, h: 50, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy19", x: 475, y: -200, w: 50, h: 30, image: enemiespic2 }),
-                   new enemyTemplate({ id: "enemy20", x: 600, y: -200, w: 50, h: 30, image: enemiespic2 })
+                   new enemyTemplate({ id: "enemy11", x: 50, y: -250, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy12", x: 225, y: -450, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy13", x: 350, y: -450, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy14", x: 475, y: -450, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy15", x: 225, y: -520, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy16", x: 350, y: -520, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy17", x: 475, y: -520, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy18", x: 600, y: -480, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy19", x: 50, y: -480, w: 90, h: 60, image: enemiespic2 }),
+                   new enemyTemplate({ id: "enemy20", x: 600, y: -250, w: 90, h: 60, image: enemiespic2 })
                   ];
 
     // This allows for more enemies to be rendered without needing a function per set of enemies.
@@ -116,7 +116,7 @@ function initCanvas(){
     var renderEnemies = function (enemyList) {
         for (var i = 0; i < enemyList.length; i++) {
             console.log(enemyList[i]);
-            ctx.drawImage(enemyList[i].image, enemyList[i].x, enemyList[i].y += .6, enemyList[i].w, enemyList[i].h);
+            ctx.drawImage(enemyList[i].image, enemyList[i].x, enemyList[i].y += 1.3, enemyList[i].w, enemyList[i].h);
             // Detects when ships hit lower level
             launcher.hitDetectLowerLevel(enemyList[i]);
         }
@@ -157,7 +157,7 @@ function initCanvas(){
 
             for(var i=0; i < this.misiles.length; i++){
                 var m = this.misiles[i];
-                ctx.drawImage(libro01, m.x, m.y-=5, m.w, m.h); // bullet direction
+                ctx.drawImage(libro01, m.x, m.y-=2.6, m.w, m.h); // bullet direction
                 this.hitDetect(this.misiles[i],i);
                 if(m.y <= 0){ // If a missile goes past the canvas boundaries, remove it
                     this.misiles.splice(i,1); // splice that missile out of the misiles array
@@ -334,7 +334,7 @@ function initCanvas(){
     });
     //This code below fires bullets (balas)
     fire_btn.addEventListener('mousedown', function(event) {
-        launcher.misiles.push({x: launcher.x + launcher.w*.5, y: launcher.y, w: 50, h: 50});
+        launcher.misiles.push({x: launcher.x + launcher.w*.5, y: launcher.y, w: 55, h: 60});
     });
     // This fires when clicking on space button from keyboard
     document.addEventListener('keydown', function(event) {
